@@ -1,0 +1,15 @@
+{
+  "extends": ["standard", "standard-react", "plugin:jest/recommended"],
+  "parser": "babel-eslint",
+  "plugins": [
+    "jest",
+    "react-hooks"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 10,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}
