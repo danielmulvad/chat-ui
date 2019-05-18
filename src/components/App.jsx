@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Sidebar from 'react-sidebar'
 import Home from '../pages/home'
+import Login from '../pages/login'
 
 export default function App () {
   const [opened, isOpen] = useState(false)
@@ -36,9 +37,9 @@ export default function App () {
             <div className='container'>
               <Switch>
                 <Route path='/' render={() => <Home />} exact />
+                <Route path='/login' render={() => <Login />} exact />
                 <Route path='/404' render={() => <Home />} exact />
               </Switch>
-              <div className='footer'>Daniel Mulvad {new Date().getFullYear()}</div>
             </div>
           </div>
         </div>
