@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'reactn'
 import App from './components/App'
 import { render } from 'react-dom'
 import 'jquery'

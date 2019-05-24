@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'reactn'
 import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Sidebar from 'react-sidebar'
 import Home from '../pages/home'
 import Login from '../pages/login'
+import Register from '../pages/register'
 
 export default function App () {
   const [opened, isOpen] = useState(false)
@@ -38,6 +39,7 @@ export default function App () {
               <Switch>
                 <Route path='/' render={() => <Home />} exact />
                 <Route path='/login' render={() => <Login />} exact />
+                <Route path='/register' render={() => <Register />} exact />
                 <Route path='/404' render={() => <Home />} exact />
               </Switch>
             </div>

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useGlobal, useState, useEffect } from 'reactn'
 import { Link } from 'react-router-dom'
 
 function Login () {
+  const [ data, setData ] = useGlobal()
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
 
@@ -9,8 +10,32 @@ function Login () {
     import('../css/login.css')
   }, [])
 
-  function handleSubmit (event) {
+  async function handleSubmit (event) {
+    var success
     event.preventDefault()
+    const body = { username: username, password: password }
+    console.log(body)
+    await window.fetch(
+
+      'http://localhost:51819/api/login',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }
+    ).then(function (response) {
+      if (response.status === 200) {
+        success = true
+      }
+      return response.json()
+    }).then(function (eH) {
+      if (success === true) {
+        setData(eH)
+        console.log(eH)
+      }
+    }).catch((err) => {
+      console.log('ERROR!', err)
+    })
   }
 
   return (
@@ -27,15 +52,15 @@ function Login () {
             </Link>
           </div>
           <form onSubmit={e => handleSubmit(e)} id='loginForm'>
-            <div className='form-group' id='username'>
+            <div className='form-group'>
               <input
                 data-testid='usernameInput'
                 className='col-md-12 form-control login-input'
                 id='username'
-                value={username}
                 onChange={e => {
                   setUsername(e.target.value)
                 }}
+                onClick={() => console.log(data)}
                 placeholder='User Name'
                 autoFocus='autoFocus'
                 type='username'
@@ -43,12 +68,11 @@ function Login () {
                 required
               />
             </div>
-            <div className='form-group' id='password'>
+            <div className='form-group'>
               <input
                 data-testid='passwordInput'
                 className='col-md-4 form-control login-input'
                 id='password'
-                value={password}
                 onChange={e => {
                   setPassword(e.target.value)
                 }}
@@ -58,7 +82,7 @@ function Login () {
                 required
               />
             </div>
-            <div type='submit' className='loginButton btn col-md-12'>
+            <div type='submit' onClick={(e) => handleSubmit(e)} className='loginButton btn col-md-12'>
               Log In
             </div>
             <div type='button' className='loginButton btn col-md-12'>

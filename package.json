@@ -5,13 +5,16 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
     "bootstrap": "^4.3.1",
+    "isomorphic-ws": "^4.0.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "react-sidebar": "^3.0.2"
+    "react-sidebar": "^3.0.2",
+    "reactn": "^2.0.2",
+    "ws": "^7.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
