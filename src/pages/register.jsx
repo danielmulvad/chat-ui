@@ -1,8 +1,7 @@
-import React, { useEffect, useGlobal } from 'reactn'
+import React, { useEffect, useState } from 'react'
 
 function Register () {
-  const [data, setData] = useGlobal()
-
+  const [input, setInput] = useState()
   useEffect(() => {
     import('../css/register.css')
   }, [])
@@ -10,14 +9,13 @@ function Register () {
   async function handleSubmit (event) {
     try {
       event.preventDefault()
-      var username = data.username.match('^(?=.{6,16}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$')[0]
-      var body = { username: username, password: data.password }
+      var username = input.username
       await window.fetch(
         'http://localhost:51819/api/user/create',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body)
+          body: JSON.stringify({ username: username, password: input.password })
         }
       ).then(res => {
         return res
@@ -48,7 +46,7 @@ function Register () {
                 className='col-md-12 form-control register-input'
                 id='username'
                 onChange={e => {
-                  setData({ ...data, username: e.target.value })
+                  setInput({ ...input, username: e.target.value })
                 }}
                 placeholder='User Name'
                 autoFocus='autoFocus'
@@ -62,7 +60,7 @@ function Register () {
                 className='col-md-4 form-control register-input'
                 id='password'
                 onChange={e => {
-                  setData({ ...data, password: e.target.value })
+                  setInput({ ...input, password: e.target.value })
                 }}
                 placeholder='Password'
                 type='password'
@@ -75,7 +73,7 @@ function Register () {
                 className='col-md-4 form-control register-input'
                 id='confirmPassword'
                 onChange={e => {
-                  setData({ ...data, confirmPassword: e.target.value })
+                  setInput({ ...input, confirmPassword: e.target.value })
                 }}
                 placeholder='Confirm Password'
                 type='password'

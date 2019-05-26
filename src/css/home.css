@@ -1,0 +1,19 @@
+#send-btn {
+    margin-left: 10px;
+    background-color: var(--dark);
+    color: white;
+}
+.container {
+    margin-top: 2.5%;
+}
+.jumbotron {
+    height: 80vh;
+    padding-top: 2.5%;
+    overflow-y: scroll;
+}
+.searchbar, .searchbar:focus {
+    border: 1px solid var(--light);
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    color: var(--primary);
+}

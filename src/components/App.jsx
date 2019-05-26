@@ -1,4 +1,4 @@
-import React, { useState } from 'reactn'
+import React, { useState } from 'react'
 import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Sidebar from 'react-sidebar'
 import Home from '../pages/home'
@@ -11,10 +11,11 @@ export default function App () {
     <Router>
       <div>
         <div className='row' style={{ height: '100vh', margin: 0 }}>
-          <div className='col-md-1 dock'>
+          <div className='dock'>
             <div type='button' onClick={() => opened ? isOpen(false) : isOpen(true)}>Open</div>
             <div type='button'><Link className='link' to='/'>Home</Link></div>
             <div type='button'><Link className='link' to='/login/'>Login</Link></div>
+            <div type='button'><Link className='link' to='/register/'>Register</Link></div>
           </div>
           <div className='col'>
             <Sidebar

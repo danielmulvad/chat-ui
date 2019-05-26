@@ -1,39 +1,57 @@
-import React, { useState, useEffect, useGlobal } from 'reactn'
+import React, { useState, useEffect } from 'react'
 
 export default function Home (props) {
   const WebSocket = require('isomorphic-ws')
-  const [data, setData] = useGlobal()
+  const [user, setUserData] = useState()
+  const [data, setData] = useState({ messages: [] })
   const [message, setMessage] = useState()
-  var ws
+  var ws = new WebSocket('ws://localhost:8080') // Connect to websocket
   useEffect(() => {
     import('../css/home.css')
-    if (data.authenticated) {
-      ws = new WebSocket('ws://localhost:8080')
+    var u = window.localStorage.getItem('user')
+    if (u) {
       ws.onopen = function open () {
         console.log('connected')
-        ws.send(data.data.username + ': connected')
       }
 
       ws.onmessage = function incoming (incomingData) {
-        console.log(data)
-        console.log(incomingData)
+        handleRecieved(incomingData.data)
       }
+
       ws.onclose = function close () {
         console.log('disconnected')
       }
-    }
+      console.log(u)
+      setUserData(JSON.parse(u))
+    } // eslint-disable-next-line
   }, [])
+
+  function sendMessage (msg) {
+    if (msg && user && user.data.username) {
+      ws.send(user.data.username + ': ' + msg)
+    }
+  }
+  function handleRecieved (msg) {
+    setData(data => ({ messages: [msg, ...data.messages] }))
+  }
 
   function handleSubmit (e) {
     e.preventDefault()
-    ws.send(message)
+    sendMessage(message)
   }
   return (
-    <div className='container'>
-      <form type='submit' onSubmit={(e) => handleSubmit(e)}>
-        <input type='text' onClick={() => console.log(data)} placeholder='input message to send' onChange={(e) => setMessage(e.target.value)} />
-        <button type='submit' onClick={e => handleSubmit(e)}>Send</button>
-        <div />
-      </form>
-    </div>)
+    (user) !== undefined ? (
+      <div className='container'>
+        <form type='submit'>
+          <div className='input-group mb-3'>
+            <input onKeyDown={(e) => e.key === 'Enter' ? handleSubmit(e) : null} type='text' className='form-control searchbar' onChange={(e) => setMessage(e.target.value)} placeholder='Type a message here' />
+            <div className='btn' id='send-btn' type='submit' onClick={(e) => handleSubmit(e)}>Send</div>
+          </div>
+          <div className='jumbotron'>
+            {data.messages ? data.messages.map((message, index) => {
+              return (<div key={index}>{message}</div>)
+            }) : null}
+          </div>
+        </form>
+      </div>) : <div>You must log in</div>)
 }

@@ -1,8 +1,8 @@
-import React, { useGlobal, useState, useEffect } from 'reactn'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 function Login () {
-  const [ data, setData ] = useGlobal()
+  const [ data, setData ] = useState()
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
 
@@ -14,16 +14,11 @@ function Login () {
     var success
     event.preventDefault()
     const body = { username: username, password: password }
-    console.log(body)
-    await window.fetch(
-
-      'http://localhost:51819/api/login',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      }
-    ).then(function (response) {
+    await window.fetch('http://localhost:51819/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (response) {
       if (response.status === 200) {
         success = true
       }
@@ -31,9 +26,9 @@ function Login () {
     }).then(function (eH) {
       if (success === true) {
         setData(eH)
-        console.log(eH)
+        window.localStorage.setItem('user', JSON.stringify(eH))
       }
-    }).catch((err) => {
+    }).then(() => { window.location = '/' }).catch((err) => {
       console.log('ERROR!', err)
     })
   }
