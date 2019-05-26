@@ -11,7 +11,7 @@ function Register () {
       event.preventDefault()
       var username = input.username
       await window.fetch(
-        'http://localhost:51819/api/user/create',
+        'http://dhm.wtf:51819/api/user/create',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

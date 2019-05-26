@@ -5,7 +5,7 @@ export default function Home (props) {
   const [user, setUserData] = useState()
   const [data, setData] = useState({ messages: [] })
   const [message, setMessage] = useState()
-  var ws = new WebSocket('ws://localhost:8080') // Connect to websocket
+  var ws = new WebSocket('ws://dhm.wtf:8080') // Connect to websocket
   useEffect(() => {
     import('../css/home.css')
     var u = window.localStorage.getItem('user')
