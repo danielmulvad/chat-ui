@@ -14,7 +14,7 @@ function Login () {
     var success
     event.preventDefault()
     const body = { username: username, password: password }
-    await window.fetch('http://dhm.wtf:51819/api/login', {
+    await window.fetch('https://dhm.wtf:51819/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
