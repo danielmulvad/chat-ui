@@ -9,7 +9,28 @@ export default function Home (props) {
   // Connect to websocket
   useEffect(() => {
     import('../css/home.css')
-    var u = window.localStorage.getItem('user')
+    var u = JSON.parse(window.localStorage.getItem('user'))
+    async function fetchData () {
+      await window.fetch(
+        'https://dhm.wtf:51819/api/user',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + u.token
+          }
+        }
+      ).then(res => {
+        return res
+      }).then(function (eH) {
+        return eH.json()
+      }).then(function (user) {
+        console.log(user)
+      }).catch((err) => {
+        console.log('ERROR!', err)
+      })
+    }
+    fetchData()
     if (u) {
       ws.onopen = function open () {
         console.log('connected')
@@ -22,8 +43,7 @@ export default function Home (props) {
       ws.onclose = function close () {
         console.log('disconnected')
       }
-      console.log(u)
-      setUserData(JSON.parse(u))
+      setUserData(u)
     } // eslint-disable-next-line
   }, [])
 
