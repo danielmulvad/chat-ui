@@ -27,7 +27,6 @@ RUN rm -rf /etc/nginx/conf.d
 
 COPY conf /etc/nginx
 COPY --from=base /build /usr/share/nginx/html
-COPY --from=base /coverage /usr/share/nginx/coverage
 
 EXPOSE 80 443
 
