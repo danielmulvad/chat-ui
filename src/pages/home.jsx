@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
+const WebSocket = require('isomorphic-ws')
+const ws = new WebSocket('wss://dhm.wtf:51819')
 
 export default function Home (props) {
-  const WebSocket = require('isomorphic-ws')
-  const [user, setUserData] = useState()
   const [data, setData] = useState({ messages: [] })
+  const [userData, setUserData] = useState()
+  const [ready, isReady] = useState(false)
   const [message, setMessage] = useState()
-  const ws = new WebSocket('wss://dhm.wtf:51819')
+
   // Connect to websocket
   useEffect(() => {
     import('../css/home.css')
@@ -25,31 +27,30 @@ export default function Home (props) {
       }).then(function (eH) {
         return eH.json()
       }).then(function (user) {
-        console.log(user)
+        setUserData(user)
+        isReady(true)
       }).catch((err) => {
         console.log('ERROR!', err)
       })
     }
     fetchData()
-    if (u) {
-      ws.onopen = function open () {
-        console.log('connected')
-      }
+    ws.onopen = function open () {
+      console.log('connected')
+    }
 
-      ws.onmessage = function incoming (incomingData) {
-        handleRecieved(incomingData.data)
-      }
+    ws.onclose = function close () {
+      console.log('disconnected')
+    }
 
-      ws.onclose = function close () {
-        console.log('disconnected')
-      }
-      setUserData(u)
-    } // eslint-disable-next-line
+    ws.onmessage = function incoming (data) {
+      handleRecieved(data.data)
+    }
+    // eslint-disable-next-line
   }, [])
 
   function sendMessage (msg) {
-    if (msg && user && user.data.username) {
-      ws.send(user.data.username + ': ' + msg)
+    if (msg) {
+      ws.send(userData.data[0].username + ': ' + msg)
     }
   }
   function handleRecieved (msg) {
@@ -61,7 +62,7 @@ export default function Home (props) {
     sendMessage(message)
   }
   return (
-    (user) !== undefined ? (
+    ready ? (
       <div className='container'>
         <form type='submit'>
           <div className='input-group mb-3'>
