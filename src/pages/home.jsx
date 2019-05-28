@@ -14,7 +14,7 @@ export default function Home (props) {
     var u = JSON.parse(window.localStorage.getItem('user'))
     async function fetchData () {
       await window.fetch(
-        'https://dhm.wtf:51819/api/user',
+        'https://dhm.wtf:51819/api/user/' + u.data.username,
         {
           method: 'GET',
           headers: {
