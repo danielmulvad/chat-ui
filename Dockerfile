@@ -26,6 +26,8 @@ MAINTAINER Daniel Mulvad <daniel.mulvad@greenwavesystems.com>
 RUN rm -rf /etc/nginx/conf.d
 
 COPY conf /etc/nginx
+COPY conf/conf.d/fullchain.pem /etc/nginx/
+COPY conf/conf.d/privkey.pem /etc/nginx/
 COPY --from=base /build /usr/share/nginx/html
 
 EXPOSE 80 443
