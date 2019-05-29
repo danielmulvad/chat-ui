@@ -5,16 +5,7 @@ MAINTAINER Daniel Mulvad <daniel.mulvad@greenwavesystems.com>
 
 ENV PATH ./node_modules/.bin:$PATH
 
-COPY package-lock.json ./package-lock.json
-COPY package.json ./package.json
-
-# --- Install Dependencies ---
-FROM base as dependencies
-
-ENV PATH ./node_modules/.bin:$PATH
-COPY . ./
-
-# install node packages
+COPY . .
 
 RUN ["npm", "ci"]
 RUN ["npm", "run", "build"]
