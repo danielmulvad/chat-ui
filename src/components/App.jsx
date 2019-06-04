@@ -7,9 +7,8 @@ const defaultAvatar = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA
 
 export default function App () {
   const [ready, isReady] = useState(false)
-  const user = window.localStorage.getItem('user')
-
   useEffect(() => {
+    const user = window.localStorage.getItem('user')
     isReady(user)
   }, [])
 
