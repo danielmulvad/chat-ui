@@ -83,5 +83,5 @@ export default function Home (props) {
 }
 
 Home.propTypes = {
-  ready: PropTypes.boolean.isRequired
+  ready: PropTypes.bool.isRequired
 }
