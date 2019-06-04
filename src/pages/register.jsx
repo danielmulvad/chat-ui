@@ -22,7 +22,7 @@ function Register () {
       }).then(function (eH) {
         console.log(eH)
         if (eH.status === 200) {
-          window.location = '/login'
+          window.location = '/'
         }
       }).catch((err) => {
         console.log('ERROR!', err)

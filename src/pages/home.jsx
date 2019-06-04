@@ -1,66 +1,69 @@
 import React, { useState, useEffect } from 'react'
 const WebSocket = require('isomorphic-ws')
+const u = JSON.parse(window.localStorage.getItem('user'))
 const ws = new WebSocket('wss://dhm.wtf:51819')
 
 export default function Home (props) {
   const [data, setData] = useState({ messages: [] })
-  const [userData, setUserData] = useState()
-  const [ready, isReady] = useState(false)
   const [message, setMessage] = useState()
+  const [ready, isReady] = useState(false)
 
   // Connect to websocket
   useEffect(() => {
     import('../css/home.css')
-    var u = JSON.parse(window.localStorage.getItem('user'))
-    async function fetchData () {
-      await window.fetch(
-        'https://dhm.wtf:51819/api/user/' + u.data.username,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + u.token
-          }
-        }
-      ).then(res => {
-        return res
-      }).then(function (eH) {
-        return eH.json()
-      }).then(function (user) {
-        setUserData(user)
-        isReady(true)
-      }).catch((err) => {
-        console.log('ERROR!', err)
-      })
-    }
-    fetchData()
+    isReady(props.ready)
     ws.onopen = function open () {
-      console.log('connected')
+      sendMessage('connected')
+    }
+
+    ws.onmessage = function incoming (data) {
+      handleRecieved(data.data)
     }
 
     ws.onclose = function close () {
       console.log('disconnected')
     }
 
-    ws.onmessage = function incoming (data) {
-      handleRecieved(data.data)
-    }
     // eslint-disable-next-line
   }, [])
 
-  function sendMessage (msg) {
-    if (msg) {
-      ws.send(userData.data[0].username + ': ' + msg)
+  async function authenticate (callback) {
+    await window.fetch(
+      'https://dhm.wtf:51819/api/token',
+      {
+        body: JSON.stringify(u.data),
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + u.data.token,
+          'Content-Type': 'application/json'
+        }
+      }
+    ).then(res => {
+      console.log(res)
+      if (res.status === 200) {
+        callback()
+      }
+    }).catch((err) => {
+      console.log('ERROR!', err)
+    })
+  }
+
+  async function sendMessage (msg) {
+    if (msg && u) {
+      await authenticate(() => {
+        ws.send(u.data.username + ': ' + msg)
+      })
     }
   }
   function handleRecieved (msg) {
-    setData(data => ({ messages: [msg, ...data.messages] }))
+    setData(data => ({ messages: [ msg, ...data.messages ] }))
   }
 
   function handleSubmit (e) {
     e.preventDefault()
     sendMessage(message)
   }
+
   return (
     ready ? (
       <div className='container'>

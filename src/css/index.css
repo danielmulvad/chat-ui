@@ -30,13 +30,13 @@ button,
 .bnt {
   border: none;
 }
+
 .dock {
   background-color: var(--primary);
   color: #fff;
   padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
   text-align: center;
+  width: 50px;
 }
 
 #dock-open-sidebar {
@@ -44,4 +44,13 @@ button,
   color: #fff;
   padding: 0;
   width: 100%;
+}
+
+.avatar {
+  border-radius: 5px;
+  height: 38px;
+}
+
+#avatar-menu {
+  margin-left: 5px;
 }
