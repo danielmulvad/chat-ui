@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 const WebSocket = require('isomorphic-ws')
 const u = JSON.parse(window.localStorage.getItem('user'))
 const ws = new WebSocket('wss://dhm.wtf:51819')
@@ -79,4 +80,8 @@ export default function Home (props) {
           </div>
         </form>
       </div>) : <div>You must log in</div>)
+}
+
+Home.propTypes = {
+  ready: PropTypes.boolean.isRequired
 }
