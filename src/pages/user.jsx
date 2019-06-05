@@ -9,7 +9,7 @@ export default function User (props) {
     const name = decodeURI(window.location.pathname.slice(6))
     async function fetchData () {
       await window.fetch(
-        'https://dhm.wtf:51819/api/user/' + name,
+        'https://dhm.wtf/api/user/' + name,
         {
           method: 'GET'
         }
@@ -50,7 +50,7 @@ export default function User (props) {
         document.getElementById('changePhotoModal-cancel-button').click()
         var token = JSON.parse(window.localStorage.getItem('user')).data.token
         window.fetch(
-          'https://dhm.wtf:51819/api/user/' + data.username,
+          'https://dhm.wtf/api/user/' + data.username,
           {
             method: 'POST',
             body: JSON.stringify({ ...data, avatar: b64 }),

@@ -15,7 +15,7 @@ function Register () {
       input.firstname = capitalize(input.firstname)
       input.lastname = capitalize(input.lastname)
       await window.fetch(
-        'https://dhm.wtf:51819/api/user/create',
+        'https://dhm.wtf/api/user/create',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

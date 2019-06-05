@@ -30,7 +30,7 @@ export default function Home (props) {
 
   async function authenticate (callback) {
     await window.fetch(
-      'https://dhm.wtf:51819/api/token',
+      'https://dhm.wtf/api/token',
       {
         body: JSON.stringify(u.data),
         method: 'POST',

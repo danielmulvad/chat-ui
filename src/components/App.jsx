@@ -13,7 +13,7 @@ export default function App () {
   useEffect(() => {
     async function fetchData () {
       await window.fetch(
-        'https://dhm.wtf:51819/api/user/' + user.data.username,
+        'https://dhm.wtf/api/user/' + user.data.username,
         {
           method: 'GET'
         }
