@@ -10,8 +10,9 @@
 }
 
 .register-input {
-    max-width: 420px;
     margin-bottom: 1rem;
+    margin-right: auto;
+    margin-left: auto;
     border: none !important;
 }
 
@@ -19,7 +20,9 @@
     margin-bottom: 24px;
     color: #666;
 }
-
+#registerForm {
+    margin-top: 1rem;
+}
 .registerButton:hover, #register-link:hover {
     color: #212529;
 }
@@ -27,7 +30,6 @@
 .registerButton, #register-link {
     background-color: var(--primary);
     border: none;
-    max-width: 420px;
     margin-bottom: 1rem;
     color: #fff;
     font-weight: bold;

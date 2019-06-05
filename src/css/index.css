@@ -17,7 +17,9 @@ button,
 [type="submit"] {
   -webkit-appearance: none;
 }
-
+#profile-link {
+  color: #000;
+}
 .link {
   color: #fff;
 }

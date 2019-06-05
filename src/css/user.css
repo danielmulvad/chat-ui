@@ -1,0 +1,102 @@
+#changePhotoModal-text {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+#changePhotoModal-icon {
+  color: #FFF;
+  background-color: #bfbfbf;
+  border: 4px solid #bfbfbf;
+  border-radius: 100%;
+}
+
+#changePhotoModal-hidden-upload {
+  display: none;
+}
+
+.modal-dialog {
+  margin: 150px auto auto auto;
+}
+
+.modal-content {
+  height: 300px;
+  width: 500px;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.03), 0 16px 24px 0 rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  border: none;
+  padding-top: 30px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.modal-body {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#profile-picture {
+  border-radius: 50%;
+}
+
+.modal-footer {
+  border: none;
+  padding-top: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-bottom: 15px;
+}
+
+#changePhotoModal-upload-button,
+#changePhotoModal-cancel-button {
+  background-color: var(--dark);
+  color: #FFF;
+  min-width: 90px;
+}
+
+#changePhotoModal-title {
+  font-size: 24px;
+}
+
+#user-details {
+  margin-top: 40px;
+}
+
+#user-details,
+#modifyButton,
+#warning {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+#name-container {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#reports-picture {
+  height: 75px;
+  width: 75px;
+}
+
+#profile-picture {
+  border: 5px solid #FFF;
+  height: 155px;
+  width: 155px;
+}
+
+#title {
+  font-size: 16px;
+  color: var(--blue)
+}
+
+#user-container {
+  margin-top: 40px;
+}
