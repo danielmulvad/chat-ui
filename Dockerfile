@@ -16,7 +16,7 @@ COPY . ./
 
 # install node packages
 
-RUN ["npm", "install"]
+RUN ["npm","ci"]
 RUN ["npm", "run", "build"]
 
 # --- Unit Testing ---

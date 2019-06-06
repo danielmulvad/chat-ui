@@ -50,7 +50,7 @@ export default function Home (props) {
   }
 
   async function sendMessage (msg) {
-    if (msg && u) {
+    if (msg) {
       await authenticate(() => {
         ws.send(u.data.username + ': ' + msg)
       })
